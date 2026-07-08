@@ -1,0 +1,208 @@
+/* style.css - DECLUTTERED & UPDATED */
+:root {
+    --primary-green: #10B981;
+    --dark-green: #059669;
+    --light-green: #D1FAE5;
+    --accent-teal: #0D9488;
+    --accent-yellow: #FBBF24;
+    --accent-blue: #3B82F6;
+    --text-dark: #1F2937;
+    --text-light: #6B7280;
+    --white: #FFFFFF;
+    --gray-light: #F9FAFB;
+    --shadow-lg: 0 20px 60px rgba(16, 185, 129, 0.15);
+    --shadow-xl: 0 25px 100px rgba(16, 185, 129, 0.2);
+}
+
+/* Consolidated Animations Only */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float-3d {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6); }
+}
+
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Consolidated Utility Classes */
+.animate-fadeIn { animation: fadeIn 0.6s ease forwards; }
+.animate-fadeInUp { animation: fadeInUp 0.8s ease forwards; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary-green), var(--accent-teal), #34D399);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 4s ease infinite;
+}
+
+/* Consolidated Button Style */
+.btn-energy, .btn-modern, .cta-button {
+    background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
+    color: white;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-energy:hover, .btn-modern:hover, .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+}
+
+.energy-orb {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+/* Simplified card styles - let index.css handle the fancy ones */
+.card {
+    background: white;
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Add these to your style.css or create animations.css */
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+    }
+    50% { 
+        transform: translateY(-15px) rotate(2deg); 
+    }
+}
+
+@keyframes float-3d {
+    0%, 100% { 
+        transform: translateY(0px) rotateX(0deg) rotateY(0deg); 
+    }
+    33% { 
+        transform: translateY(-10px) rotateX(2deg) rotateY(2deg); 
+    }
+    66% { 
+        transform: translateY(-5px) rotateX(-1deg) rotateY(-1deg); 
+    }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+    50% { 
+        box-shadow: 0 0 40px rgba(16, 185, 129, 0.6),
+                   0 0 60px rgba(16, 185, 129, 0.3);
+    }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Animation Classes */
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-3d {
+    animation: float-3d 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+    animation: shimmer 2s infinite;
+}
+
+/* Fix the floating elements in hero section */
+.hero-section .animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.hero-section .animate-float:nth-child(2) {
+    animation-delay: 1s;
+}
+
+
+
+/* ///////////////////////////////////////////////////////////////////////////*/
+
+:root {
+    --primary-green: #10B981;
+    --dark-green: #059669;
+    --light-green: #D1FAE5;
+    --accent-teal: #0D9488;
+    --accent-yellow: #FBBF24;
+    --accent-blue: #3B82F6;
+    --accent-red: #EF4444;
+    --accent-purple: #8B5CF6;
+    --text-dark: #1F2937;
+    --text-light: #6B7280;
+    --white: #FFFFFF;
+    --gray-light: #F9FAFB;
+    --shadow-sm: 0 4px 12px rgba(16, 185, 129, 0.1);
+    --shadow-md: 0 10px 30px rgba(16, 185, 129, 0.15);
+    --shadow-lg: 0 20px 60px rgba(16, 185, 129, 0.15);
+    --shadow-xl: 0 25px 100px rgba(16, 185, 129, 0.2);
+}
+
+/* Add these animations to style.css if not already there */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+    50% { 
+        box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+    }
+}

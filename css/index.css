@@ -1,0 +1,392 @@
+/* Clean Energy Theme Enhancements - DECLUTTERED */
+
+/* Enhanced Hero Section */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.1), transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(13, 148, 136, 0.05), transparent 50%);
+    animation: float-3d 20s ease-in-out infinite;
+}
+
+/* Enhanced Feature Icons */
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
+    color: white;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+}
+
+.feature-icon:hover {
+    transform: translateY(-8px) rotate(5deg);
+    box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+}
+
+/* Enhanced Stats Counter */
+.stats-counter {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    display: inline-block;
+}
+
+.stats-counter::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-green), var(--accent-teal));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
+}
+
+.stats-counter:hover::after {
+    transform: scaleX(1);
+}
+
+/* Enhanced CTA Button */
+.cta-button {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
+    color: white;
+    font-weight: 700;
+    padding: 16px 40px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 
+        0 10px 30px rgba(16, 185, 129, 0.3),
+        0 0 60px rgba(16, 185, 129, 0.2);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cta-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+        0 15px 40px rgba(16, 185, 129, 0.4),
+        0 0 80px rgba(16, 185, 129, 0.3);
+}
+
+.cta-button:active {
+    transform: translateY(-1px);
+}
+
+/* Enhanced Testimonial Cards */
+.testimonial-card {
+    background: linear-gradient(145deg, 
+        rgba(255, 255, 255, 0.95), 
+        rgba(255, 255, 255, 0.85));
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 1px solid rgba(16, 185, 129, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 20px 40px rgba(16, 185, 129, 0.15),
+        0 0 60px rgba(16, 185, 129, 0.05);
+}
+
+/* Enhanced Floating Elements */
+.floating-element {
+    animation: float-3d 3s ease-in-out infinite;
+    background: white;
+    box-shadow: 
+        0 15px 35px rgba(16, 185, 129, 0.1),
+        0 0 40px rgba(16, 185, 129, 0.05);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 1px solid rgba(16, 185, 129, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* Enhanced Gradient Border */
+.gradient-border {
+    position: relative;
+    border-radius: 24px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+}
+
+.gradient-border > * {
+    background: white;
+    border-radius: 22px;
+    padding: 2rem;
+}
+
+/* Enhanced Hover Effects for Images */
+.hover-zoom {
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.hover-zoom:hover {
+    transform: scale(1.02);
+    box-shadow: 
+        0 20px 60px rgba(16, 185, 129, 0.2),
+        0 0 80px rgba(16, 185, 129, 0.1);
+}
+
+/* Enhanced Newsletter Form */
+.newsletter-form input:focus {
+    border-color: var(--primary-green);
+    box-shadow: 
+        0 0 0 4px rgba(16, 185, 129, 0.15),
+        0 10px 30px rgba(16, 185, 129, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Enhanced Social Media Icons */
+.social-media-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.social-media-icon:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.2),
+        0 0 30px currentColor;
+}
+
+/* Enhanced Progress Indicators */
+.circular-progress .progress {
+    stroke: url(#gradient);
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    animation: progress-animation 2s ease forwards;
+}
+
+@keyframes progress-animation {
+    to {
+        stroke-dashoffset: calc(283 - (283 * var(--progress)) / 100);
+    }
+}
+
+/* Clean Energy Background Patterns */
+.bg-pattern {
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(16, 185, 129, 0.03) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(13, 148, 136, 0.03) 2px, transparent 2px);
+    background-size: 60px 60px;
+}
+
+/* Enhanced Energy Hover Effects */
+.energy-hover {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+}
+
+.energy-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 20px 40px rgba(16, 185, 129, 0.2),
+        0 0 60px rgba(16, 185, 129, 0.1);
+}
+
+/* Clean Energy Animation Classes */
+.animate-visible {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Enhanced Feature Cards - Clean Energy Theme */
+.feature-card {
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+        rgba(16, 185, 129, 0.05), 
+        rgba(13, 148, 136, 0.05));
+    border-radius: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+.feature-card:hover .feature-icon {
+    transform: translateY(-10px) rotateY(180deg);
+    box-shadow: 
+        0 20px 40px rgba(16, 185, 129, 0.3),
+        0 0 60px rgba(16, 185, 129, 0.2);
+}
+
+.feature-card .learn-more {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.feature-card .learn-more::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-green), var(--accent-teal));
+    transition: width 0.4s ease;
+}
+
+.feature-card:hover .learn-more::after {
+    width: 100%;
+}
+
+/* Enhanced icon animations */
+.feature-card .icon-wrapper {
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.feature-card:hover .icon-wrapper {
+    animation: iconGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes iconGlow {
+    from {
+        filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.3));
+    }
+    to {
+        filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.6));
+    }
+}
+
+/* Energy ripple effect on hover */
+.feature-card::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.2), transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease;
+    z-index: 0;
+}
+
+.feature-card:hover::after {
+    width: 200%;
+    height: 200%;
+}
+
+/* Staggered animation for feature cards */
+.feature-card:nth-child(1) { transition-delay: 0.1s; }
+.feature-card:nth-child(2) { transition-delay: 0.2s; }
+.feature-card:nth-child(3) { transition-delay: 0.3s; }
+.feature-card:nth-child(4) { transition-delay: 0.4s; }
+
+/* Clean energy shine effect */
+.feature-card .shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    transition: left 0.8s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.feature-card:hover .shine {
+    left: 100%;
+}
+
+/* Enhanced text content animations */
+.feature-card .content {
+    position: relative;
+    z-index: 2;
+    transition: transform 0.4s ease;
+}
+
+.feature-card:hover .content {
+    transform: translateY(-5px);
+}
+
+/* Gradient border on hover */
+.feature-card .border-gradient {
+    position: absolute;
+    inset: -1px;
+    border-radius: 1.5rem;
+    padding: 1px;
+    background: linear-gradient(135deg, 
+        var(--primary-green), 
+        var(--accent-teal),
+        var(--accent-blue));
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+}
+
+.feature-card:hover .border-gradient {
+    opacity: 1;
+}

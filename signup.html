@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>PADYAKWATTS - Sign Up</title>
+    <link rel="stylesheet" href="./css/tailwind.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="./css/style.css"/>
+    <link rel="stylesheet" href="./css/signup.css"/>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 100%);
+            min-height: 100vh;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #10B981, #0D9488);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .energy-orb {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, #10B981, #0D9488);
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+            animation: float 4s ease-in-out infinite;
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
+        }
+        
+        .energy-orb::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.8), transparent);
+            border-radius: 50%;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body class="text-gray-800 min-h-screen flex flex-col items-center justify-center p-4">
+    <!-- Logo with Animation -->
+    <div class="text-center mb-8 animate-fadeIn">
+        <div class="energy-orb mb-6">
+            <i class="fas fa-bolt text-white text-4xl absolute inset-0 flex items-center justify-center z-10"></i>
+        </div>
+        <h1 class="text-4xl font-bold gradient-text mb-2">PADYAKWATTS</h1>
+        <p class="text-gray-600">Pedal-Powered Clean Energy</p>
+    </div>
+    
+    <!-- Signup Card -->
+    <div class="login-container card w-full max-w-lg p-8 animate-slideIn">
+        <h2 class="text-2xl font-bold text-center mb-8">Create Account</h2>
+
+        <div id="error-box" class="message-box error mb-6 hidden">
+            <div class="flex items-start">
+                <i class="fas fa-exclamation-circle text-red-500 mr-3 mt-1"></i>
+                <div class="text-red-700 font-medium" id="error-text"></div>
+            </div>
+        </div>
+
+        <div id="success-box" class="message-box success mb-6 hidden">
+            <div class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                <div class="text-green-700 font-medium" id="success-text"></div>
+            </div>
+        </div>
+        
+        <!-- Back Button -->
+        <div class="mb-6">
+            <a href="javascript:history.back()" class="enhanced-link inline-flex items-center font-medium transition-colors duration-200">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Back
+            </a>
+        </div>
+        
+        <form class="space-y-6" id="signup-form">
+            <!-- Two Column Layout for Names -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="form-group">
+                    <label class="block mb-2" for="firstname">
+                        First Name *
+                    </label>
+                    <input class="enhanced-input w-full" 
+                           id="firstname" 
+                           name="firstname" 
+                           placeholder="John" 
+                           required 
+                           type="text"/>
+                </div>
+                <div class="form-group">
+                    <label class="block mb-2" for="lastname">
+                        Last Name *
+                    </label>
+                    <input class="enhanced-input w-full" 
+                           id="lastname" 
+                           name="lastname" 
+                           placeholder="Doe" 
+                           required 
+                           type="text"/>
+                </div>
+            </div>
+            
+            <!-- Email -->
+            <div class="form-group">
+                <label class="block mb-2" for="email">
+                    Email Address *
+                </label>
+                <input class="enhanced-input w-full" 
+                       id="email" 
+                       name="email" 
+                       placeholder="you@example.com" 
+                       required 
+                       type="email"/>
+            </div>
+            
+            <!-- Password -->
+            <div class="form-group">
+                <label class="block mb-2" for="password">
+                    Password *
+                </label>
+                <div class="relative">
+                    <input class="enhanced-input w-full pr-12" 
+                           id="password" 
+                           name="password" 
+                           placeholder="Minimum 6 characters with special character" 
+                           required 
+                           type="password"/>
+                    <button type="button" 
+                            class="password-toggle"
+                            onclick="togglePassword('password')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <p class="text-sm text-gray-500 mt-1">
+                    <i class="fas fa-info-circle mr-1"></i>Must be at least 6 characters and include at least one special character.
+                </p>
+                <div class="mt-2">
+                    <div class="password-strength bg-gray-200 w-full h-2 rounded-full overflow-hidden">
+                        <div class="h-full bg-red-500 rounded-full transition-all duration-300" id="password-strength-bar" style="width: 0%"></div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1" id="password-strength-text"></p>
+                </div>
+            </div>
+            
+            <!-- Confirm Password -->
+            <div class="form-group">
+                <label class="block mb-2" for="confirm-password">
+                    Confirm Password *
+                </label>
+                <div class="relative">
+                    <input class="enhanced-input w-full pr-12" 
+                           id="confirm-password" 
+                           name="confirm-password" 
+                           placeholder="Re-enter your password" 
+                           required 
+                           type="password"/>
+                    <button type="button" 
+                            class="password-toggle"
+                            onclick="togglePassword('confirm-password')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <p class="text-sm text-red-500 mt-1 hidden" id="password-match-error">
+                    <i class="fas fa-times-circle mr-1"></i>Passwords do not match
+                </p>
+                <p class="text-sm text-green-500 mt-1 hidden" id="password-match-success">
+                    <i class="fas fa-check-circle mr-1"></i>Passwords match
+                </p>
+            </div>
+            
+            <!-- Phone -->
+            <div class="form-group">
+                <label class="block mb-2" for="phone">
+                    Phone Number *
+                </label>
+                <input class="enhanced-input w-full" 
+                       id="phone" 
+                       name="phone" 
+                       placeholder="+63 912 345 6789" 
+                       required 
+                       type="tel"/>
+            </div>
+            
+            <!-- Location -->
+            <div class="form-group">
+                <label class="block mb-2" for="location">
+                    Address *
+                </label>
+                <input class="enhanced-input w-full" 
+                       id="location" 
+                       name="location" 
+                       placeholder="Enter your full address" 
+                       required 
+                       type="text"/>
+            </div>
+            
+            <!-- Terms -->
+            <div class="flex items-start">
+                <label class="enhanced-checkbox">
+                    <input type="checkbox" 
+                           id="terms" 
+                           name="terms" 
+                           required>
+                    <span class="checkmark"></span>
+                    <span class="text-gray-700 text-sm ml-2">
+                        I agree to the
+                        <a href="#" class="enhanced-link font-semibold">terms of use</a>
+                        and
+                        <a href="#" class="enhanced-link font-semibold">privacy policy</a>
+                        *
+                    </span>
+                </label>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" 
+                    class="enhanced-submit w-full"
+                    id="submit-btn">
+                <i class="fas fa-user-plus mr-2"></i>Create Account
+            </button>
+            
+            <!-- Already have account -->
+            <div class="mt-8 pt-8 border-t border-gray-100 text-center">
+                <p class="text-gray-600 mb-4">Already have an account?</p>
+                <a href="./login.html" 
+                   class="inline-block w-full py-3 border-2 border-green-600 text-green-600 font-semibold rounded-lg hover:bg-green-50 transition-all duration-300 flex items-center justify-center">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+                </a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="login-footer mt-12 text-center">
+        <p>© 2024 PADYAKWATTS. Powering communities with clean energy.</p>
+        <p class="text-xs opacity-70 mt-1">Front-end portfolio demo — accounts are stored only in your browser.</p>
+    </footer>
+    
+    <script src="./js/data.js"></script>
+    <script>
+        if (window.PWData.getCurrentUser()) {
+            window.location.href = 'dashboard.html';
+        }
+
+        // Password strength calculator
+        function calculatePasswordStrength(password) {
+            let strength = 0;
+            let message = '';
+            let color = '#EF4444';
+            let percentage = 0;
+
+            if (!password) {
+                return { percentage: 0, message: '', color: '#EF4444' };
+            }
+
+            if (password.length >= 6) strength += 20;
+            if (password.length >= 8) strength += 20;
+            if (password.length >= 12) strength += 10;
+
+            if (/[A-Z]/.test(password)) strength += 15;
+            if (/[a-z]/.test(password)) strength += 15;
+            if (/[0-9]/.test(password)) strength += 15;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 15;
+
+            percentage = Math.min(strength, 100);
+
+            if (percentage < 40) { message = 'Weak'; color = '#EF4444'; }
+            else if (percentage < 70) { message = 'Medium'; color = '#F59E0B'; }
+            else if (percentage < 85) { message = 'Strong'; color = '#10B981'; }
+            else { message = 'Very Strong'; color = '#059669'; }
+
+            return { percentage, message, color };
+        }
+
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const strengthBar = document.getElementById('password-strength-bar');
+        const strengthText = document.getElementById('password-strength-text');
+        const matchError = document.getElementById('password-match-error');
+        const matchSuccess = document.getElementById('password-match-success');
+
+        passwordInput.addEventListener('input', function () {
+            const password = this.value;
+            const strength = calculatePasswordStrength(password);
+
+            strengthBar.style.width = strength.percentage + '%';
+            strengthBar.style.backgroundColor = strength.color;
+
+            if (password.length === 0) {
+                strengthText.textContent = '';
+                strengthText.className = 'text-xs text-gray-500 mt-1';
+            } else {
+                strengthText.textContent = strength.message + ' password';
+                strengthText.className = 'text-xs ' +
+                    (strength.percentage < 40 ? 'text-red-500' :
+                     strength.percentage < 70 ? 'text-yellow-500' :
+                     strength.percentage < 85 ? 'text-green-500' : 'text-green-600') + ' mt-1';
+            }
+
+            checkPasswordMatch();
+        });
+
+        confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+
+        function checkPasswordMatch() {
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            if (confirmPassword === '') {
+                matchError.classList.add('hidden');
+                matchSuccess.classList.add('hidden');
+                confirmPasswordInput.classList.remove('border-red-500', 'border-green-500');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                matchError.classList.remove('hidden');
+                matchSuccess.classList.add('hidden');
+                confirmPasswordInput.classList.add('border-red-500');
+                confirmPasswordInput.classList.remove('border-green-500');
+            } else {
+                matchError.classList.add('hidden');
+                matchSuccess.classList.remove('hidden');
+                confirmPasswordInput.classList.remove('border-red-500');
+                confirmPasswordInput.classList.add('border-green-500');
+            }
+        }
+
+        function togglePassword(fieldId) {
+            const input = document.getElementById(fieldId);
+            const eyeIcon = event.currentTarget.querySelector('i');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+
+            if (value.length > 0) {
+                if (value.length <= 3) value = `+${value}`;
+                else if (value.length <= 6) value = `+${value.slice(0, 3)} ${value.slice(3)}`;
+                else if (value.length <= 9) value = `+${value.slice(0, 3)} ${value.slice(3, 6)} ${value.slice(6)}`;
+                else value = `+${value.slice(0, 3)} ${value.slice(3, 6)} ${value.slice(6, 9)} ${value.slice(9, 13)}`;
+            }
+
+            e.target.value = value;
+        });
+
+        function showErrors(errors) {
+            document.getElementById('error-text').innerHTML = errors.join('<br>');
+            document.getElementById('error-box').classList.remove('hidden');
+            document.getElementById('success-box').classList.add('hidden');
+        }
+
+        document.getElementById('signup-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            document.getElementById('error-box').classList.add('hidden');
+            document.getElementById('success-box').classList.add('hidden');
+
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Creating Account...';
+
+            const payload = {
+                firstName: document.getElementById('firstname').value,
+                lastName: document.getElementById('lastname').value,
+                email: document.getElementById('email').value,
+                password: passwordInput.value,
+                confirmPassword: confirmPasswordInput.value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('location').value,
+                terms: document.getElementById('terms').checked,
+            };
+
+            setTimeout(() => {
+                const result = window.PWData.signup(payload);
+
+                if (!result.ok) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-user-plus mr-2"></i>Create Account';
+                    showErrors(result.errors);
+                    return;
+                }
+
+                document.getElementById('success-text').textContent = 'Account created successfully! Redirecting to your dashboard...';
+                document.getElementById('success-box').classList.remove('hidden');
+                setTimeout(() => { window.location.href = 'dashboard.html'; }, 1200);
+            }, 400);
+        });
+    </script>
+</body>
+</html>

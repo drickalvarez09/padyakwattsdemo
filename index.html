@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>PADYAKWATTS - Pedal Powered Charging Station</title>
+    <link rel="stylesheet" href="./css/tailwind.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="./css/style.css"/>
+    <link rel="stylesheet" href="./css/index.css"/>
+    
+    <style>
+    /* Enhanced Click Effects - Clean Energy Theme */
+    .energy-pulse {
+        position: absolute;
+        pointer-events: none;
+        border-radius: 50%;
+        z-index: 9999;
+    }
+    
+    .energy-pulse.pulse-1 {
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(circle, var(--primary-green), transparent);
+        animation: energyPulse1 1s ease-out forwards;
+        filter: blur(2px);
+    }
+    
+    .energy-pulse.pulse-2 {
+        width: 40px;
+        height: 40px;
+        background: radial-gradient(circle, var(--accent-teal), transparent);
+        animation: energyPulse2 1.2s ease-out forwards;
+        filter: blur(3px);
+    }
+    
+    .energy-pulse.pulse-3 {
+        width: 60px;
+        height: 60px;
+        background: radial-gradient(circle, #34D399, transparent);
+        animation: energyPulse3 1.4s ease-out forwards;
+        filter: blur(4px);
+    }
+    
+    .energy-spark {
+        position: absolute;
+        pointer-events: none;
+        width: 8px;
+        height: 8px;
+        background: var(--primary-green);
+        border-radius: 50%;
+        filter: drop-shadow(0 0 10px var(--primary-green));
+        animation: energySpark 0.8s ease-out forwards;
+    }
+    
+    .energy-wave {
+        position: absolute;
+        pointer-events: none;
+        border: 2px solid var(--accent-teal);
+        border-radius: 50%;
+        animation: energyWave 1s ease-out forwards;
+        filter: blur(1px);
+    }
+    
+    /* Energy Orb Trail */
+    .energy-trail {
+        position: absolute;
+        pointer-events: none;
+        width: 4px;
+        height: 4px;
+        background: linear-gradient(45deg, var(--primary-green), var(--accent-teal));
+        border-radius: 50%;
+        filter: blur(1px);
+        animation: energyTrail 1s linear forwards;
+    }
+    
+   
+    
+    /* Enhanced Hero Section Hover */
+    .hero-image {
+        position: relative;
+        overflow: hidden;
+        border-radius: 24px;
+    }
+    
+    .hero-image::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(45deg,
+            rgba(16, 185, 129, 0.1),
+            rgba(13, 148, 136, 0.05));
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    
+    .hero-image:hover::after {
+        opacity: 1;
+    }
+    
+    .hero-image img {
+        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .hero-image:hover img {
+        transform: scale(1.05);
+    }
+    
+    /* Enhanced Button Hover Effects */
+    .btn-energy {
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    .btn-energy::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s ease, height 0.6s ease;
+    }
+    
+    .btn-energy:hover::after {
+        width: 300px;
+        height: 300px;
+    }
+    
+    /* Enhanced Feature Card Hover */
+    .feature-card {
+        position: relative;
+        overflow: hidden;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+    }
+    
+    .feature-card .icon-wrapper {
+        transform-style: preserve-3d;
+        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .feature-card:hover .icon-wrapper {
+        transform: rotateY(180deg) scale(1.1);
+        animation: iconPulse 1s ease infinite alternate;
+    }
+    
+    .feature-card:hover .learn-more {
+        transform: translateX(5px);
+    }
+    
+    /* Enhanced Stats Counter Hover */
+    .stats-card:hover .stats-number {
+        animation: numberPulse 0.5s ease;
+    }
+    
+    .stats-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 
+            0 25px 50px rgba(16, 185, 129, 0.2),
+            0 0 80px rgba(16, 185, 129, 0.15);
+    }
+    
+    /* Enhanced Nav Link Hover */
+    .nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+    border-radius: 20px;
+}
+
+.nav-link:hover {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(13, 148, 136, 0.05));
+    transform: translateY(-2px);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-green), var(--accent-teal));
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after {
+    transform: translateX(-50%) scaleX(1);
+}
+    
+    /* Enhanced Contact Form Hover */
+    .contact-input {
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.95);
+    }
+    
+    .contact-input:focus {
+        border-color: var(--primary-green);
+        box-shadow: 
+            0 0 0 4px rgba(16, 185, 129, 0.15),
+            0 10px 30px rgba(16, 185, 129, 0.1);
+        transform: translateY(-2px);
+    }
+    
+    .contact-input:hover:not(:focus) {
+        border-color: rgba(16, 185, 129, 0.3);
+        transform: translateY(-1px);
+    }
+    
+    /* Enhanced Footer Link Hover */
+    footer a {
+        position: relative;
+        transition: color 0.3s ease;
+    }
+    
+    footer a::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, var(--primary-green), white);
+        transition: width 0.4s ease;
+    }
+    
+    footer a:hover::before {
+        width: 100%;
+    }
+    
+    footer a:hover {
+        color: white;
+    }
+    
+    /* Enhanced Social Icon Hover */
+    .social-icon {
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .social-icon:hover {
+        transform: translateY(-5px) rotate(10deg);
+        background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
+        box-shadow: 
+            0 10px 30px rgba(16, 185, 129, 0.3),
+            0 0 50px rgba(16, 185, 129, 0.2);
+    }
+    
+    /* Enhanced Newsletter Input Hover */
+    .newsletter-input {
+        transition: all 0.3s ease;
+    }
+    
+    .newsletter-input:focus {
+        border-color: var(--primary-green);
+        box-shadow: 
+            0 0 0 4px rgba(16, 185, 129, 0.15),
+            0 10px 30px rgba(16, 185, 129, 0.1);
+    }
+    
+    .newsletter-input:hover:not(:focus) {
+        border-color: rgba(16, 185, 129, 0.3);
+    }
+    
+    /* Enhanced Progress Bar Animation */
+    .energy-progress {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .energy-progress::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent);
+        animation: shimmer 2s infinite;
+    }
+    
+    /* Animation Keyframes */
+    @keyframes energyPulse1 {
+        0% {
+            transform: scale(0);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(3);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes energyPulse2 {
+        0% {
+            transform: scale(0);
+            opacity: 0.8;
+        }
+        100% {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes energyPulse3 {
+        0% {
+            transform: scale(0);
+            opacity: 0.6;
+        }
+        100% {
+            transform: scale(5);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes energySpark {
+        0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(var(--spark-x, 50px), var(--spark-y, -50px)) scale(0);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes energyWave {
+        0% {
+            transform: scale(0);
+            opacity: 1;
+            border-width: 2px;
+        }
+        100% {
+            transform: scale(3);
+            opacity: 0;
+            border-width: 1px;
+        }
+    }
+    
+    @keyframes energyTrail {
+        0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            transform: translate(var(--trail-x, 100px), var(--trail-y, 100px)) scale(0);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes gradientShift {
+        0%, 100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+    
+    @keyframes iconPulse {
+        from {
+            filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.3));
+        }
+        to {
+            filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.6));
+        }
+    }
+    
+    @keyframes numberPulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+    }
+    
+    @keyframes shimmer {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(100%);
+        }
+    }
+</style>
+<!-- Add this CSS for the footer animation -->
+<style>
+    @keyframes shimmer-footer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+    
+    .animate-shimmer-footer {
+        animation: shimmer-footer 3s ease-in-out infinite;
+    }
+    
+    .group-hover-link:hover {
+        padding-left: 8px;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent);
+        border-radius: 4px;
+    }
+</style>
+
+
+<style>
+   /* REPLACE the existing footer body styles with this */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    left: 0;
+    right: 0;
+    position: relative;
+}
+</style>
+
+</head>
+<body class="text-gray-800">
+    <!-- Animated Background Particles -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="hero-bg"></div>
+    </div>
+    
+    <!-- Modern Header -->
+    <header class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="energy-orb animate-pulse-glow">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold gradient-text tracking-tight">PADYAKWATTS</h1>
+                    <p class="text-xs text-gray-500">Clean Energy Initiative</p>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex space-x-2">
+    <a class="nav-link px-5 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 font-medium transition-all duration-300 rounded-full" href="#overview">
+        Overview
+    </a>
+    <a class="nav-link px-5 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 font-medium transition-all duration-300 rounded-full" href="#features">
+        Features
+    </a>
+    <a class="nav-link px-5 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 font-medium transition-all duration-300 rounded-full" href="#goals">
+        Goals
+    </a>
+    <a class="nav-link px-5 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 font-medium transition-all duration-300 rounded-full" href="#usecase">
+        Use Case
+    </a>
+    <a class="nav-link px-5 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 font-medium transition-all duration-300 rounded-full" href="#contact">
+        Contact
+    </a>
+</nav>
+            
+            <div class="flex items-center space-x-4">
+                <a href="./dashboard.html?demo=1" class="hidden sm:inline-flex items-center px-5 py-2 text-sm font-semibold text-green-700 border-2 border-green-600 rounded-full hover:bg-green-50 transition-all duration-300">
+                    <i class="fas fa-eye mr-2"></i>View Live Demo
+                </a>
+                <a href="./login.html" class="btn-energy py-2 px-6 text-sm">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Login
+                </a>
+                <button aria-label="Toggle menu" class="md:hidden text-gray-700 hover:text-green-600 transition-colors" id="menu-btn">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <nav class="md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-3 hidden shadow-lg" id="mobile-menu">
+            <a class="block text-gray-700 hover:text-green-600 hover:bg-green-50 px-4 py-3 rounded-lg transition-colors font-medium" href="#overview">
+                <i class="fas fa-home mr-3"></i>Overview
+            </a>
+            <a class="block text-gray-700 hover:text-green-600 hover:bg-green-50 px-4 py-3 rounded-lg transition-colors font-medium" href="#features">
+                <i class="fas fa-star mr-3"></i>Features
+            </a>
+            <a class="block text-gray-700 hover:text-green-600 hover:bg-green-50 px-4 py-3 rounded-lg transition-colors font-medium" href="#goals">
+                <i class="fas fa-bullseye mr-3"></i>Goals
+            </a>
+            <a class="block text-gray-700 hover:text-green-600 hover:bg-green-50 px-4 py-3 rounded-lg transition-colors font-medium" href="#usecase">
+                <i class="fas fa-lightbulb mr-3"></i>Use Case
+            </a>
+            <a class="block text-gray-700 hover:text-green-600 hover:bg-green-50 px-4 py-3 rounded-lg transition-colors font-medium" href="#contact">
+                <i class="fas fa-envelope mr-3"></i>Contact
+            </a>
+        </nav>
+    </header>
+    
+    <main class="max-w-7xl mx-auto px-6 py-12 relative z-10">
+        <!-- Modern Hero Section -->
+        <section class="relative rounded-3xl overflow-hidden mb-20" id="overview">
+            <div class="absolute inset-0 bg-gradient-to-br from-green-50 via-teal-50 to-blue-50"></div>
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGM2LjYyNyAwIDEyIDUuMzczIDEyIDEycy01LjM3MyAxMi0xMiAxMi0xMi01LjM3My0xMi0xMiA1LjM3My0xMiAxMi0xMnptMCA0YzQuNDE4IDAgOCAzLjU4MiA4IDhzLTMuNTgyIDgtOCA4LTgtMy41ODItOC04IDMuNTgyLTggOC04eiIgZmlsbD0iIzEwQjk4MSIgZmlsbC1vcGFjaXR5PSIwLjEiLz48L2c+PC9zdmc+')] opacity-30"></div>
+            
+            <div class="relative flex flex-col-reverse md:flex-row items-center gap-12 p-8 md:p-12">
+                <div class="md:w-1/2">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-green-100 text-green-700 font-semibold text-sm mb-6">
+                        <i class="fas fa-bolt mr-2 animate-pulse"></i>Clean Energy Revolution
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        <span class="gradient-text">Pedal Power</span><br>
+                        <span class="text-gray-800">for a</span>
+                        <span class="gradient-text">Sustainable Future</span>
+                    </h2>
+                    
+                    <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+                        Transform your physical energy into clean electricity. Charge devices, reduce your carbon footprint, and power communities with every pedal stroke.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <a href="./dashboard.html?demo=1" class="btn-energy px-8 py-4 text-lg flex items-center justify-center">
+                            <i class="fas fa-play mr-3"></i>View Live Demo
+                        </a>
+                        <a href="./signup.html" class="px-8 py-4 border-2 border-green-600 text-green-600 rounded-full font-semibold hover:bg-green-50 transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-user-plus mr-3"></i>Join Now
+                        </a>
+                    </div>
+                    
+                    <!-- Live Stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="stats-card rounded-xl p-4 text-center">
+                            <div class="text-2xl font-bold text-green-600 mb-1">500+</div>
+                            <div class="text-sm text-gray-600">Active Users</div>
+                        </div>
+                        <div class="stats-card rounded-xl p-4 text-center">
+                            <div class="text-2xl font-bold text-green-600 mb-1">2.5K+</div>
+                            <div class="text-sm text-gray-600">Wh Generated</div>
+                        </div>
+                        <div class="stats-card rounded-xl p-4 text-center">
+                            <div class="text-2xl font-bold text-green-600 mb-1">120Kg</div>
+                            <div class="text-sm text-gray-600">CO₂ Saved</div>
+                        </div>
+                        <div class="stats-card rounded-xl p-4 text-center">
+                            <div class="text-2xl font-bold text-green-600 mb-1">15</div>
+                            <div class="text-sm text-gray-600">Installations</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 relative">
+                    <div class="relative">
+                        <img class="w-full rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500" 
+                             src="./img/landing1.png" 
+                             alt="PADYAKWATTS Station"/>
+                        
+                        <!-- Floating Elements - UPDATED -->
+<div class="absolute -top-4 -right-4 bg-white rounded-xl p-4 shadow-xl animate-float border border-green-100 floating-element">
+    <div class="flex items-center">
+        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+            <i class="fas fa-bolt text-green-600"></i>
+        </div>
+        <div>
+            <div class="font-bold text-green-700">Live Energy</div>
+            <div class="text-sm text-gray-600">Generating now</div>
+        </div>
+    </div>
+</div>
+
+<div class="absolute -bottom-4 -left-4 bg-white rounded-xl p-4 shadow-xl animate-float border border-teal-100 floating-element" style="animation-delay: 1.5s">
+    <div class="flex items-center">
+        <div class="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center mr-3">
+            <i class="fas fa-leaf text-teal-600"></i>
+        </div>
+        <div>
+            <div class="font-bold text-teal-700">CO₂ Saved</div>
+            <div class="text-sm text-gray-600">120g today</div>
+        </div>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Modern Features Section - UPDATED WITH PROPER HOVER EFFECTS -->
+<section class="mb-20" id="features">
+    <div class="text-center mb-12">
+        <h3 class="text-3xl md:text-4xl font-bold gradient-text mb-4">Innovative Features</h3>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">Experience the future of clean energy generation with our cutting-edge technology</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Feature 1 - ENHANCED -->
+        <div class="feature-card group relative bg-white rounded-2xl p-8 shadow-lg border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-teal-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+            
+            <div class="relative z-10">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                    <i class="fas fa-bicycle text-2xl text-green-600 group-hover:text-green-700 transition-colors"></i>
+                </div>
+                
+                <h4 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-green-700 transition-colors">Pedal-Powered Charging</h4>
+                <p class="text-gray-600 mb-6">Convert physical energy into electricity with our efficient pedal generator system.</p>
+                
+                <div class="flex items-center text-green-600 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-500">
+                    <span class="mr-2">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            
+            <!-- Hover background effect -->
+            <div class="absolute inset-0 bg-gradient-to-br from-green-50/0 to-teal-50/0 group-hover:from-green-50/30 group-hover:to-teal-50/30 transition-all duration-500 rounded-2xl"></div>
+            
+            <!-- Energy particles on hover -->
+            <div class="absolute inset-0 overflow-hidden rounded-2xl">
+                <div class="absolute -inset-1 bg-gradient-to-r from-green-400/0 via-green-400/10 to-green-400/0 group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+            </div>
+        </div>
+        
+        <!-- Feature 2 - ENHANCED -->
+        <div class="feature-card group relative bg-white rounded-2xl p-8 shadow-lg border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-teal-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+            
+            <div class="relative z-10">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                    <i class="fas fa-cogs text-2xl text-blue-600 group-hover:text-blue-700 transition-colors"></i>
+                </div>
+                
+                <h4 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-blue-700 transition-colors">Energy Conversion</h4>
+                <p class="text-gray-600 mb-6">Advanced conversion system that transforms pedal motion into usable electrical power.</p>
+                
+                <div class="flex items-center text-blue-600 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-500">
+                    <span class="mr-2">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            
+            <!-- Hover background effect -->
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-50/0 to-teal-50/0 group-hover:from-blue-50/30 group-hover:to-teal-50/30 transition-all duration-500 rounded-2xl"></div>
+            
+            <!-- Energy particles on hover -->
+            <div class="absolute inset-0 overflow-hidden rounded-2xl">
+                <div class="absolute -inset-1 bg-gradient-to-r from-blue-400/0 via-blue-400/10 to-blue-400/0 group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+            </div>
+        </div>
+        
+        <!-- Feature 3 - ENHANCED -->
+        <div class="feature-card group relative bg-white rounded-2xl p-8 shadow-lg border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-green-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+            
+            <div class="relative z-10">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-teal-100 to-teal-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                    <i class="fas fa-chart-line text-2xl text-teal-600 group-hover:text-teal-700 transition-colors"></i>
+                </div>
+                
+                <h4 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-teal-700 transition-colors">Real-Time Monitoring</h4>
+                <p class="text-gray-600 mb-6">Track energy generation, CO₂ savings, and personal contributions in real-time.</p>
+                
+                <div class="flex items-center text-teal-600 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-500">
+                    <span class="mr-2">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            
+            <!-- Hover background effect -->
+            <div class="absolute inset-0 bg-gradient-to-br from-teal-50/0 to-green-50/0 group-hover:from-teal-50/30 group-hover:to-green-50/30 transition-all duration-500 rounded-2xl"></div>
+            
+            <!-- Energy particles on hover -->
+            <div class="absolute inset-0 overflow-hidden rounded-2xl">
+                <div class="absolute -inset-1 bg-gradient-to-r from-teal-400/0 via-teal-400/10 to-teal-400/0 group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+            </div>
+        </div>
+        
+        <!-- Feature 4 - ENHANCED -->
+        <div class="feature-card group relative bg-white rounded-2xl p-8 shadow-lg border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-orange-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+            
+            <div class="relative z-10">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-yellow-100 to-yellow-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                    <i class="fas fa-shield-alt text-2xl text-yellow-600 group-hover:text-yellow-700 transition-colors"></i>
+                </div>
+                
+                <h4 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-yellow-700 transition-colors">Emergency Ready</h4>
+                <p class="text-gray-600 mb-6">Built-in battery backup for uninterrupted power during emergencies and outages.</p>
+                
+                <div class="flex items-center text-yellow-600 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-500">
+                    <span class="mr-2">Learn More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            
+            <!-- Hover background effect -->
+            <div class="absolute inset-0 bg-gradient-to-br from-yellow-50/0 to-orange-50/0 group-hover:from-yellow-50/30 group-hover:to-orange-50/30 transition-all duration-500 rounded-2xl"></div>
+            
+            <!-- Energy particles on hover -->
+            <div class="absolute inset-0 overflow-hidden rounded-2xl">
+                <div class="absolute -inset-1 bg-gradient-to-r from-yellow-400/0 via-yellow-400/10 to-yellow-400/0 group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+            </div>
+        </div>
+    </div>
+</section>
+        
+        <!-- Enhanced Goals Section with Interactive Cards -->
+<section class="mb-20" id="goals">
+    <div class="bg-gradient-to-br from-green-500 via-teal-500 to-emerald-600 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-green-400/10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-teal-400/10 rounded-full translate-x-1/3 translate-y-1/3"></div>
+        
+        <div class="relative max-w-6xl mx-auto text-center text-white z-10">
+            <h3 class="text-3xl md:text-4xl font-bold mb-4">Our Sustainable Mission</h3>
+            <p class="text-lg text-white/90 mb-12 max-w-3xl mx-auto">Driving change through innovative clean energy solutions for a sustainable future</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Goal 1 - Enhanced -->
+                <div class="goal-card group relative bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 transition-all duration-500 hover:bg-white/15 hover:border-white/40 hover:scale-105 hover:-translate-y-2 overflow-hidden">
+                    <div class="absolute top-4 right-4 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500">
+                        🌱
+                    </div>
+                    
+                    <div class="pt-12">
+                        <h4 class="text-xl font-semibold mb-4 group-hover:text-green-200 transition-colors">Clean Energy Access</h4>
+                        <p class="text-white/80 text-sm leading-relaxed group-hover:text-white transition-colors">Provide free, sustainable energy in public spaces worldwide</p>
+                    </div>
+                    
+                    <!-- Energy pulse effect -->
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    
+                    <!-- Shimmer effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                </div>
+                
+                <!-- Goal 2 - Enhanced -->
+                <div class="goal-card group relative bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 transition-all duration-500 hover:bg-white/15 hover:border-white/40 hover:scale-105 hover:-translate-y-2 overflow-hidden">
+                    <div class="absolute top-4 right-4 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500">
+                        🚴‍♂️
+                    </div>
+                    
+                    <div class="pt-12">
+                        <h4 class="text-xl font-semibold mb-4 group-hover:text-green-200 transition-colors">Human-Powered Energy</h4>
+                        <p class="text-white/80 text-sm leading-relaxed group-hover:text-white transition-colors">Promote health and sustainability through pedal-powered generation</p>
+                    </div>
+                    
+                    <!-- Energy pulse effect -->
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    
+                    <!-- Shimmer effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" style="animation-delay: 0.2s"></div>
+                </div>
+                
+                <!-- Goal 3 - Enhanced -->
+                <div class="goal-card group relative bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 transition-all duration-500 hover:bg-white/15 hover:border-white/40 hover:scale-105 hover:-translate-y-2 overflow-hidden">
+                    <div class="absolute top-4 right-4 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500">
+                        🛡️
+                    </div>
+                    
+                    <div class="pt-12">
+                        <h4 class="text-xl font-semibold mb-4 group-hover:text-green-200 transition-colors">Disaster Resilience</h4>
+                        <p class="text-white/80 text-sm leading-relaxed group-hover:text-white transition-colors">Emergency-ready charging solutions for critical situations</p>
+                    </div>
+                    
+                    <!-- Energy pulse effect -->
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    
+                    <!-- Shimmer effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" style="animation-delay: 0.4s"></div>
+                </div>
+                
+                <!-- Goal 4 - Enhanced -->
+                <div class="goal-card group relative bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 transition-all duration-500 hover:bg-white/15 hover:border-white/40 hover:scale-105 hover:-translate-y-2 overflow-hidden">
+                    <div class="absolute top-4 right-4 w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500">
+                        🌍
+                    </div>
+                    
+                    <div class="pt-12">
+                        <h4 class="text-xl font-semibold mb-4 group-hover:text-green-200 transition-colors">Community Impact</h4>
+                        <p class="text-white/80 text-sm leading-relaxed group-hover:text-white transition-colors">Scalable solutions empowering communities globally</p>
+                    </div>
+                    
+                    <!-- Energy pulse effect -->
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-green-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                    
+                    <!-- Shimmer effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" style="animation-delay: 0.6s"></div>
+                </div>
+            </div>
+            
+            <div class="mt-16">
+                <a href="./signup.html" class="inline-flex items-center px-8 py-4 bg-white text-green-600 rounded-full font-bold text-lg hover:bg-gray-50 hover:scale-105 hover:shadow-2xl transition-all duration-300 group relative overflow-hidden">
+                    <i class="fas fa-hands-helping mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                    <span class="relative z-10">Join Our Mission</span>
+                    
+                    <!-- Energy background effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <!-- Shimmer effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Enhanced Use Case Section with Interactive Cards -->
+<section class="mb-20" id="usecase">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div>
+            <h3 class="text-3xl md:text-4xl font-bold gradient-text mb-6">Transformative Applications</h3>
+            <p class="text-lg text-gray-600 mb-8">Discover how PADYAKWATTS is powering communities and creating sustainable impact across various sectors.</p>
+            
+            <div class="space-y-8">
+                <!-- Use Case 1 - Enhanced -->
+                <div class="usecase-card group flex items-start space-x-6 p-6 rounded-2xl bg-white shadow-lg border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-green-200">
+                    <div class="relative">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                            <i class="fas fa-bus text-2xl text-green-600 group-hover:text-green-700 transition-colors"></i>
+                        </div>
+                        
+                        <!-- Pulse ring effect -->
+                        <div class="absolute inset-0 w-16 h-16 rounded-xl border-2 border-green-300 opacity-0 group-hover:opacity-100 scale-150 group-hover:scale-100 transition-all duration-500"></div>
+                    </div>
+                    
+                    <div class="flex-1">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-green-700 transition-colors">Public Transit Hubs</h4>
+                        <p class="text-gray-600 mb-4">Installed in waiting sheds and terminals, commuters can charge devices while waiting for transportation, turning idle time into productive energy generation.</p>
+                        
+                        <div class="flex items-center text-green-600 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-500">
+                            <span class="mr-2">View Case Study</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Energy line effect -->
+                    <div class="absolute bottom-0 left-6 right-6 h-1 bg-gradient-to-r from-green-400 to-teal-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-full"></div>
+                </div>
+                
+                <!-- Use Case 2 - Enhanced -->
+                <div class="usecase-card group flex items-start space-x-6 p-6 rounded-2xl bg-white shadow-lg border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-200">
+                    <div class="relative">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                            <i class="fas fa-school text-2xl text-blue-600 group-hover:text-blue-700 transition-colors"></i>
+                        </div>
+                        
+                        <!-- Pulse ring effect -->
+                        <div class="absolute inset-0 w-16 h-16 rounded-xl border-2 border-blue-300 opacity-0 group-hover:opacity-100 scale-150 group-hover:scale-100 transition-all duration-500"></div>
+                    </div>
+                    
+                    <div class="flex-1">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-blue-700 transition-colors">Educational Institutions</h4>
+                        <p class="text-gray-600 mb-4">Schools and universities use PADYAKWATTS for practical energy education, sustainable power, and hands-on learning about renewable energy technologies.</p>
+                        
+                        <div class="flex items-center text-blue-600 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-500">
+                            <span class="mr-2">View Case Study</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Energy line effect -->
+                    <div class="absolute bottom-0 left-6 right-6 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-full"></div>
+                </div>
+                
+                <!-- Use Case 3 - Enhanced -->
+                <div class="usecase-card group flex items-start space-x-6 p-6 rounded-2xl bg-white shadow-lg border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-red-200">
+                    <div class="relative">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                            <i class="fas fa-first-aid text-2xl text-red-600 group-hover:text-red-700 transition-colors"></i>
+                        </div>
+                        
+                        <!-- Pulse ring effect -->
+                        <div class="absolute inset-0 w-16 h-16 rounded-xl border-2 border-red-300 opacity-0 group-hover:opacity-100 scale-150 group-hover:scale-100 transition-all duration-500"></div>
+                    </div>
+                    
+                    <div class="flex-1">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-red-700 transition-colors">Emergency Response</h4>
+                        <p class="text-gray-600 mb-4">During disasters and emergencies, provides critical power for communication devices, medical equipment, and emergency lighting when traditional power fails.</p>
+                        
+                        <div class="flex items-center text-red-600 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-500">
+                            <span class="mr-2">View Case Study</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Energy line effect -->
+                    <div class="absolute bottom-0 left-6 right-6 h-1 bg-gradient-to-r from-red-400 to-orange-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-full"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Enhanced Live Impact Tracker -->
+        <div class="sticky top-24">
+            <div class="bg-gradient-to-br from-white to-green-50 rounded-2xl p-8 shadow-xl border border-green-100">
+                <div class="text-center mb-8">
+                    <div class="energy-orb mx-auto mb-4 animate-pulse-glow">
+                        <i class="fas fa-bolt text-white"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-800 mb-2">Live Impact Tracker</h4>
+                    <p class="text-gray-600 text-sm">Real-time statistics of our collective energy generation</p>
+                </div>
+                
+                <div class="space-y-8">
+                    <!-- Stat 1 - Enhanced -->
+                    <div class="group">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 rounded-full bg-green-400 mr-3 group-hover:scale-150 transition-transform duration-300"></div>
+                                <span class="text-sm font-medium text-gray-700">Today's Energy Generated</span>
+                            </div>
+                            <span class="text-lg font-bold text-green-600 group-hover:scale-110 transition-transform duration-300">850 Wh</span>
+                        </div>
+                        <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-green-400 to-teal-400 rounded-full relative overflow-hidden group-hover:w-full transition-all duration-1000" style="width: 75%">
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Stat 2 - Enhanced -->
+                    <div class="group">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 rounded-full bg-teal-400 mr-3 group-hover:scale-150 transition-transform duration-300"></div>
+                                <span class="text-sm font-medium text-gray-700">CO₂ Reduction</span>
+                            </div>
+                            <span class="text-lg font-bold text-teal-600 group-hover:scale-110 transition-transform duration-300">42.5 kg</span>
+                        </div>
+                        <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-teal-400 to-cyan-400 rounded-full relative overflow-hidden group-hover:w-full transition-all duration-1000" style="width: 60%">
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" style="animation-delay: 0.2s"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Stat 3 - Enhanced -->
+                    <div class="group">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 rounded-full bg-blue-400 mr-3 group-hover:scale-150 transition-transform duration-300"></div>
+                                <span class="text-sm font-medium text-gray-700">Active Users</span>
+                            </div>
+                            <span class="text-lg font-bold text-blue-600 group-hover:scale-110 transition-transform duration-300">512</span>
+                        </div>
+                        <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full relative overflow-hidden group-hover:w-full transition-all duration-1000" style="width: 85%">
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" style="animation-delay: 0.4s"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 pt-8 border-t border-gray-200">
+                    <div class="text-center">
+                        <div class="flex items-center justify-center text-gray-600 mb-4 group">
+                            <i class="fas fa-globe-americas mr-3 text-green-500 group-hover:rotate-12 transition-transform duration-500"></i>
+                            <span class="text-sm font-medium">Join <span class="text-green-600 font-bold">512</span> others in creating sustainable impact</span>
+                        </div>
+                        
+                        <a href="./signup.html" class="inline-flex items-center justify-center w-full py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                            <i class="fas fa-user-plus mr-2 group-hover:rotate-12 transition-transform duration-300"></i>
+                            Start Contributing Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Enhanced Contact Section -->
+<section class="mb-20" id="contact">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl md:text-4xl font-bold gradient-text mb-4">Get In Touch</h3>
+            <p class="text-lg text-gray-600">Interested in PADYAKWATTS or want to collaborate? We'd love to hear from you.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Enhanced Contact Cards -->
+            <div class="space-y-6">
+                <!-- Contact Card 1 - Enhanced -->
+                <div class="contact-card group relative bg-white rounded-2xl p-8 shadow-lg border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-green-200">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-t-2xl"></div>
+                    
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                        <i class="fas fa-map-marker-alt text-2xl text-green-600 group-hover:text-green-700 transition-colors"></i>
+                    </div>
+                    
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4 group-hover:text-green-700 transition-colors">Our Location</h4>
+                    <p class="text-gray-600 mb-4">123 Clean Energy Ave<br>Green City, GC 1234</p>
+                    
+                    <div class="flex items-center text-green-600 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-500">
+                        <span class="mr-2">Get Directions</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <!-- Shimmer effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-green-50/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
+                </div>
+                
+                <!-- Contact Card 2 - Enhanced -->
+                <div class="contact-card group relative bg-white rounded-2xl p-8 shadow-lg border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-200">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-t-2xl"></div>
+                    
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                        <i class="fas fa-phone text-2xl text-blue-600 group-hover:text-blue-700 transition-colors"></i>
+                    </div>
+                    
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4 group-hover:text-blue-700 transition-colors">Contact Number</h4>
+                    <p class="text-gray-600 mb-4">+1 (234) 567-8900<br>Mon-Fri, 9AM-6PM</p>
+                    
+                    <div class="flex items-center text-blue-600 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-500">
+                        <span class="mr-2">Call Now</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <!-- Shimmer effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-blue-50/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl" style="animation-delay: 0.2s"></div>
+                </div>
+                
+                <!-- Contact Card 3 - Enhanced -->
+                <div class="contact-card group relative bg-white rounded-2xl p-8 shadow-lg border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-teal-200">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-emerald-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-t-2xl"></div>
+                    
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-teal-100 to-teal-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+                        <i class="fas fa-envelope text-2xl text-teal-600 group-hover:text-teal-700 transition-colors"></i>
+                    </div>
+                    
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4 group-hover:text-teal-700 transition-colors">Email Address</h4>
+                    <p class="text-gray-600 mb-4">info@padyakwatts.com<br>support@padyakwatts.com</p>
+                    
+                    <div class="flex items-center text-teal-600 text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all duration-500">
+                        <span class="mr-2">Email Us</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <!-- Shimmer effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-teal-50/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl" style="animation-delay: 0.4s"></div>
+                </div>
+            </div>
+            
+            <!-- Enhanced Contact Form - UPDATED TO MATCH LIVE IMPACT TRACKER -->
+            <div class="lg:col-span-2">
+                <div class="sticky top-24"> <!-- Added sticky positioning -->
+                    <div class="bg-gradient-to-br from-white to-green-50 rounded-2xl p-8 shadow-xl border border-green-100 relative overflow-hidden">
+                        <!-- Animated background -->
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-green-100/20 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                        <div class="absolute bottom-0 left-0 w-96 h-96 bg-teal-100/20 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="text-center mb-8">
+                                <div class="energy-orb mx-auto mb-4 animate-pulse-glow">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <h4 class="text-2xl font-bold text-gray-800 mb-2">Send Us a Message</h4>
+                                <p class="text-gray-600 text-sm">Fill out the form below and we'll get back to you within 24 hours.</p>
+                            </div>
+                            
+                            <form action="#" class="space-y-6" method="POST" novalidate="">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="form-group group">
+                                        <label class="block text-sm font-semibold text-gray-700 mb-3 flex items-center" for="name">
+                                            <div class="w-3 h-3 rounded-full bg-green-400 mr-3 group-hover:scale-150 transition-transform duration-300"></div>
+                                            Your Name
+                                        </label>
+                                        <input class="contact-input w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 hover:border-green-300 group-hover:shadow-md" 
+                                               name="name" 
+                                               placeholder="John Doe" 
+                                               required="" 
+                                               type="text"/>
+                                        <div class="h-1 bg-gray-200 rounded-full overflow-hidden mt-2">
+                                            <div class="h-full bg-gradient-to-r from-green-400 to-teal-400 rounded-full transform scale-x-0 group-hover:scale-x-100 group-focus-within:scale-x-100 transition-transform duration-500 origin-left"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group group">
+                                        <label class="block text-sm font-semibold text-gray-700 mb-3 flex items-center" for="email">
+                                            <div class="w-3 h-3 rounded-full bg-blue-400 mr-3 group-hover:scale-150 transition-transform duration-300"></div>
+                                            Your Email
+                                        </label>
+                                        <input class="contact-input w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:border-blue-300 group-hover:shadow-md" 
+                                               name="email" 
+                                               placeholder="john@example.com" 
+                                               required="" 
+                                               type="email"/>
+                                        <div class="h-1 bg-gray-200 rounded-full overflow-hidden mt-2">
+                                            <div class="h-full bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full transform scale-x-0 group-hover:scale-x-100 group-focus-within:scale-x-100 transition-transform duration-500 origin-left"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group group">
+                                    <label class="block text-sm font-semibold text-gray-700 mb-3 flex items-center" for="subject">
+                                        <div class="w-3 h-3 rounded-full bg-teal-400 mr-3 group-hover:scale-150 transition-transform duration-300"></div>
+                                        Subject
+                                    </label>
+                                    <input class="contact-input w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent transition-all duration-300 hover:border-teal-300 group-hover:shadow-md" 
+                                           name="subject" 
+                                           placeholder="How can we help you?" 
+                                           required="" 
+                                           type="text"/>
+                                    <div class="h-1 bg-gray-200 rounded-full overflow-hidden mt-2">
+                                        <div class="h-full bg-gradient-to-r from-teal-400 to-emerald-400 rounded-full transform scale-x-0 group-hover:scale-x-100 group-focus-within:scale-x-100 transition-transform duration-500 origin-left"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group group">
+                                    <label class="block text-sm font-semibold text-gray-700 mb-3 flex items-center" for="message">
+                                        <div class="w-3 h-3 rounded-full bg-purple-400 mr-3 group-hover:scale-150 transition-transform duration-300"></div>
+                                        Your Message
+                                    </label>
+                                    <textarea class="contact-input w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 hover:border-purple-300 group-hover:shadow-md" 
+                                              name="message" 
+                                              placeholder="Tell us about your project or inquiry..." 
+                                              required="" 
+                                              rows="5"></textarea>
+                                    <div class="h-1 bg-gray-200 rounded-full overflow-hidden mt-2">
+                                        <div class="h-full bg-gradient-to-r from-purple-400 to-pink-400 rounded-full transform scale-x-0 group-hover:scale-x-100 group-focus-within:scale-x-100 transition-transform duration-500 origin-left"></div>
+                                    </div>
+                                </div>
+                                
+                                <button class="btn-energy w-full py-4 text-lg group relative overflow-hidden mt-8" type="submit">
+                                    <i class="fas fa-paper-plane mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                                    <span class="relative z-10">Send Message</span>
+                                    
+                                    <!-- Shimmer effect -->
+                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+   <!-- Enhanced Footer with Clean Energy Theme -->
+<footer class="bg-gradient-to-br from-green-600 via-teal-600 to-emerald-700 text-white">
+    <div class="max-w-full mx-auto px-6 py-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Brand Section - Enhanced -->
+                <div class="group">
+                    <div class="flex items-center space-x-3 mb-6 hover:space-x-4 transition-all duration-300">
+                        <div class="energy-orb group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold group-hover:text-green-200 transition-colors">PADYAKWATTS</h2>
+                    </div>
+                    <p class="text-white/80 mb-6 leading-relaxed group-hover:text-white/90 transition-colors">
+                        Powering communities with clean, sustainable energy through innovative pedal-powered solutions.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-1" href="#">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-1" href="#">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-1" href="#">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-1" href="#">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links - Enhanced -->
+                <div class="group">
+                    <h3 class="text-lg font-semibold mb-6 relative">
+                        <span class="group-hover:text-green-200 transition-colors">Quick Links</span>
+                        <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-green-300 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a class="text-white/80 hover:text-white flex items-center group-hover-link transition-all duration-300" href="#overview">
+                            <span class="w-0 h-0.5 bg-green-300 mr-0 group-hover:w-4 group-hover:mr-2 transition-all duration-300"></span>
+                            Overview
+                        </a></li>
+                        <li><a class="text-white/80 hover:text-white flex items-center group-hover-link transition-all duration-300" href="#features">
+                            <span class="w-0 h-0.5 bg-green-300 mr-0 group-hover:w-4 group-hover:mr-2 transition-all duration-300"></span>
+                            Features
+                        </a></li>
+                        <li><a class="text-white/80 hover:text-white flex items-center group-hover-link transition-all duration-300" href="#usecase">
+                            <span class="w-0 h-0.5 bg-green-300 mr-0 group-hover:w-4 group-hover:mr-2 transition-all duration-300"></span>
+                            Use Cases
+                        </a></li>
+                        <li><a class="text-white/80 hover:text-white flex items-center group-hover-link transition-all duration-300" href="./login.html">
+                            <span class="w-0 h-0.5 bg-green-300 mr-0 group-hover:w-4 group-hover:mr-2 transition-all duration-300"></span>
+                            Dashboard
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources - Enhanced -->
+                <div class="group">
+                    <h3 class="text-lg font-semibold mb-6 relative">
+                        <span class="group-hover:text-teal-200 transition-colors">Resources</span>
+                        <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-teal-300 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a class="text-white/80 hover:text-white flex items-center group-hover-link transition-all duration-300" href="#">
+                            <span class="w-0 h-0.5 bg-teal-300 mr-0 group-hover:w-4 group-hover:mr-2 transition-all duration-300"></span>
+                            Documentation
+                        </a></li>
+                        <li><a class="text-white/80 hover:text-white flex items-center group-hover-link transition-all duration-300" href="#">
+                            <span class="w-0 h-0.5 bg-teal-300 mr-0 group-hover:w-4 group-hover:mr-2 transition-all duration-300"></span>
+                            API Reference
+                        </a></li>
+                        <li><a class="text-white/80 hover:text-white flex items-center group-hover-link transition-all duration-300" href="#">
+                            <span class="w-0 h-0.5 bg-teal-300 mr-0 group-hover:w-4 group-hover:mr-2 transition-all duration-300"></span>
+                            Community
+                        </a></li>
+                        <li><a class="text-white/80 hover:text-white flex items-center group-hover-link transition-all duration-300" href="#">
+                            <span class="w-0 h-0.5 bg-teal-300 mr-0 group-hover:w-4 group-hover:mr-2 transition-all duration-300"></span>
+                            Blog
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <!-- Newsletter - Enhanced -->
+                <div class="group">
+                    <h3 class="text-lg font-semibold mb-6 relative">
+                        <span class="group-hover:text-emerald-200 transition-colors">Newsletter</span>
+                        <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-emerald-300 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    </h3>
+                    <p class="text-white/80 mb-6 group-hover:text-white/90 transition-colors">Stay updated with our latest innovations and sustainability tips.</p>
+                    <form class="flex group-hover:scale-105 transition-transform duration-300">
+                        <input class="flex-1 px-4 py-3 rounded-l-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300" 
+                               placeholder="Your email" 
+                               type="email"/>
+                        <button class="bg-white text-green-600 px-4 py-3 rounded-r-lg font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 relative overflow-hidden group" type="submit">
+                            <i class="fas fa-paper-plane group-hover:rotate-12 transition-transform duration-300"></i>
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                        </button>
+                    </form>
+                    <p class="mt-4 text-white/60 text-sm group-hover:text-white/70 transition-colors">Join 2,500+ subscribers</p>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom - Enhanced -->
+            <div class="mt-16 pt-8 border-t border-white/20 text-center relative overflow-hidden">
+                <!-- Animated energy line -->
+                <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-shimmer-footer"></div>
+                
+                <div class="space-y-4">
+                    <p class="text-white/70">
+                        © 2024 PADYAKWATTS. All rights reserved. | 
+                        <a class="text-white/80 hover:text-white transition-colors duration-300 hover:underline" href="#">Privacy Policy</a> | 
+                        <a class="text-white/80 hover:text-white transition-colors duration-300 hover:underline" href="#">Terms of Service</a>
+                    </p>
+                    <p class="text-white/60 italic flex items-center justify-center">
+                        <i class="fas fa-leaf text-green-300 mr-2 animate-pulse"></i>
+                        Powering a greener tomorrow, one pedal at a time.
+                    </p>
+                </div>
+                
+                <!-- Energy dots -->
+                <div class="flex justify-center space-x-2 mt-6">
+                    <div class="w-2 h-2 rounded-full bg-green-300 animate-pulse"></div>
+                    <div class="w-2 h-2 rounded-full bg-teal-300 animate-pulse" style="animation-delay: 0.2s"></div>
+                    <div class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" style="animation-delay: 0.4s"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+    <script src="./js/index.js"></script>
+    
+    <script>
+// DECLUTTERED & ENHANCED Clean Energy Effects
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+    
+    // Enhanced scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    // Observe elements for scroll animations
+    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    
+    // Enhanced Clean Energy Click Effects
+       // Enhanced Clean Energy Click Effects - NOW ON ENTIRE PAGE
+    document.addEventListener('click', function(e) {
+        // Create energy effects on ANY click anywhere on the page
+        createEnergyEffect(e.clientX, e.clientY);
+    });
+    
+    // Energy effect function
+    function createEnergyEffect(x, y) {
+        const colors = ['#10B981', '#0D9488', '#34D399'];
+        
+        // Create central energy pulse
+        const pulse = document.createElement('div');
+        pulse.style.cssText = `
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, ${colors[0]}, transparent);
+            pointer-events: none;
+            z-index: 9999;
+            left: ${x}px;
+            top: ${y}px;
+            transform: scale(0);
+            animation: energy-pulse 0.8s ease-out forwards;
+        `;
+        
+        document.body.appendChild(pulse);
+        setTimeout(() => pulse.remove(), 800);
+        
+        // Create energy particles
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+                const particle = document.createElement('div');
+                const color = colors[i % colors.length];
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 30 + Math.random() * 40;
+                
+                particle.style.cssText = `
+                    position: fixed;
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: ${color};
+                    pointer-events: none;
+                    z-index: 9999;
+                    left: ${x}px;
+                    top: ${y}px;
+                    box-shadow: 0 0 10px ${color};
+                `;
+                
+                document.body.appendChild(particle);
+                
+                // Animate particle
+                const duration = 600;
+                const startTime = Date.now();
+                
+                function animateParticle() {
+                    const elapsed = Date.now() - startTime;
+                    const progress = elapsed / duration;
+                    
+                    if (progress < 1) {
+                        const currentX = Math.cos(angle) * distance * progress;
+                        const currentY = Math.sin(angle) * distance * progress;
+                        const scale = 1 - progress;
+                        
+                        particle.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+                        particle.style.opacity = 1 - progress;
+                        requestAnimationFrame(animateParticle);
+                    } else {
+                        particle.remove();
+                    }
+                }
+                
+                animateParticle();
+                
+            }, i * 100);
+        }
+    }
+    
+    // Enhanced hover effects for cards
+    document.querySelectorAll('.feature-card, .stats-card').forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateY = (x - centerX) / 40;
+            const rotateX = (centerY - y) / 40;
+            
+            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        });
+    });
+    
+    // Animate stats on scroll
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const stats = entry.target.querySelectorAll('.stats-number');
+                stats.forEach((stat, index) => {
+                    const finalValue = parseInt(stat.textContent);
+                    let currentValue = 0;
+                    const increment = finalValue / 30;
+                    
+                    const updateStat = () => {
+                        currentValue += increment;
+                        if (currentValue < finalValue) {
+                            stat.textContent = Math.floor(currentValue) + '+';
+                            setTimeout(updateStat, 30);
+                        } else {
+                            stat.textContent = finalValue + '+';
+                        }
+                    };
+                    
+                    setTimeout(updateStat, index * 200);
+                });
+                
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    document.querySelectorAll('.stats-section').forEach(section => {
+        statsObserver.observe(section);
+    });
+    
+    // Add ripple effect to buttons
+    document.querySelectorAll('.btn-energy, .btn-modern, .cta-button').forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                transform: scale(0);
+                animation: energy-pulse 0.6s linear;
+                width: ${size}px;
+                height: ${size}px;
+                top: ${y}px;
+                left: ${x}px;
+                pointer-events: none;
+            `;
+            
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+    
+    // Add energy-hover class to interactive elements
+    document.querySelectorAll('.feature-card, .stats-card, .nav-link, footer a').forEach(el => {
+        el.classList.add('energy-hover');
+    });
+    
+    // Initial energy pulse on load
+    setTimeout(() => {
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        createEnergyEffect(centerX, centerY);
+    }, 500);
+});
+
+// Add animation styles
+const energyStyles = document.createElement('style');
+energyStyles.textContent = `
+    @keyframes energy-pulse {
+        0% {
+            transform: scale(0);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+    
+    .energy-particle {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+    }
+`;
+document.head.appendChild(energyStyles);
+</script>
+</body>
+</html>
